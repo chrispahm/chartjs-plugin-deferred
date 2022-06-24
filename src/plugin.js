@@ -1,6 +1,5 @@
 'use strict';
 
-import {Chart} from 'chart.js';
 import {requestAnimFrame, getStyle} from 'chart.js/helpers';
 
 var STUB_KEY = '$chartjs_deferred';
@@ -119,7 +118,7 @@ function unwatch(chart) {
   chart[MODEL_KEY].elements = [];
 }
 
-Chart.register({
+export default {
   id: 'deferred',
 
   defaults: {
@@ -153,6 +152,10 @@ Chart.register({
       unwatch(chart);
 
       if (options.delay > 0) {
+
+        // eslint-disable-next-line no-console
+        console.log(options.delay);
+
         model.delayed = true;
         defer(function() {
           // Ensure the chart instance is still alive. It may have been destroyed
@@ -179,4 +182,4 @@ Chart.register({
   destroy: function(chart) {
     unwatch(chart);
   }
-});
+};
